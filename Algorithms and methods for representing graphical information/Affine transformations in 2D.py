@@ -18,7 +18,7 @@ class AffineTransformationsGUI:
         self.create_buttons()
 
     def calculate_equilateral_pentagon(self, center_x, center_y, side_length):
-        pentagon = [] #список для хранения координат вершин.
+        pentagon = []
         angle_deg = 270
         angle_rad = math.radians(angle_deg)
         for i in range(5):
@@ -36,6 +36,12 @@ class AffineTransformationsGUI:
     def move_pentagon(self, dx, dy):
         self.pentagon = [(x + dx, y + dy) for x, y in self.pentagon]
         self.draw_pentagon()
+
+    def move_up(self):
+        self.move_pentagon(0, -10)
+
+    def move_down(self):
+        self.move_pentagon(0, 10)
 
     def rotate_pentagon(self, angle):
         cx = sum(x for x, _ in self.pentagon) / 5
@@ -69,8 +75,13 @@ class AffineTransformationsGUI:
 
         self.draw_pentagon()
 
-
     def create_buttons(self):
+        move_up_button = tk.Button(self.root, text="Move Up", command=self.move_up)
+        move_up_button.pack(side=tk.LEFT)
+
+        move_down_button = tk.Button(self.root, text="Move Down", command=self.move_down)
+        move_down_button.pack(side=tk.LEFT)
+
         move_left_button = tk.Button(self.root, text="Move Left", command=lambda: self.move_pentagon(-10, 0))
         move_left_button.pack(side=tk.LEFT)
 
